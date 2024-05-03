@@ -13,6 +13,7 @@ mongoose.connect('mongodb+srv://s6430613015:J6430613015!@cluster0.rzstdpl.mongod
 global.loggedIn = null
 
 // Controllers
+const indexController = require('./controllers/indexController')
 const loginController = require('./controllers/loginController')
 const registerController = require('./controllers/registerController')
 const storeUserController = require('./controllers/storeUserController')
@@ -20,7 +21,7 @@ const loginUserController = require('./controllers/loginUserController')
 const logoutController = require('./controllers/logoutController')
 const homeController = require('./controllers/homeController')
 
-// // Middleware
+// Middleware
 const redirectIfAuth = require('./middleware/redirectIfAuth')
 const authMiddleware = require('./middleware/authMiddleware')
 
@@ -37,14 +38,13 @@ app.use("*", (req, res, next) => {
 })
 app.set('view engine', 'ejs')
 
-app.get('/', redirectIfAuth, loginController)
+app.get('/', indexController)
+app.get('/home', authMiddleware, homeController)
+app.get('/login', redirectIfAuth, loginController)
 app.get('/register', redirectIfAuth, registerController)
 app.post('/user/register', redirectIfAuth, storeUserController)
 app.post('/user/login', redirectIfAuth, loginUserController)
 app.get('/logout', logoutController)
-app.get('/home', authMiddleware, homeController)
-
-
 
 app.listen(4000, () => {
     console.log("App listening on port 4000")
