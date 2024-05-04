@@ -46,6 +46,9 @@ const loginUserController = require('./controllers/loginUserController')
 const logoutController = require('./controllers/logoutController')
 const homeController = require('./controllers/homeController')
 const atkReportController = require('./controllers/atkReportController')
+const adminController = require('./controllers/adminController');
+const editReportController = require('./controllers/editReportController'); 
+const deleteReportController = require('./controllers/deleteReportController'); 
 
 // Middleware
 const redirectIfAuth = require('./middleware/redirectIfAuth')
@@ -56,7 +59,9 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(flash())
 app.use(expressSession({
-    secret: "node secret"
+    secret: "node secret",
+    saveUninitialized: true,
+    resave: true
 }))
 app.use("*", (req, res, next) => {
     loggedIn = req.session.userId
@@ -72,6 +77,10 @@ app.post('/user/register', redirectIfAuth, storeUserController)
 app.post('/user/login', redirectIfAuth, loginUserController)
 app.get('/logout', logoutController)
 app.post('/user/atk-report', authMiddleware, upload.single('image'), atkReportController);
+app.get('/admin', authMiddleware, adminController);
+app.get('/edit/:id', authMiddleware, editReportController.get);
+app.post('/edit/:id', authMiddleware, editReportController.post);
+app.get('/delete/:id', authMiddleware, deleteReportController);
 
 app.listen(4000, () => {
     console.log("App listening on port 4000")
