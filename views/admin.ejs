@@ -40,6 +40,11 @@
           font-size: 3.5rem;
         }
       }
+      .logout-button {
+            position: absolute;
+            right: 15px; /* Adjust right padding as needed */
+            top: 15px; /* Adjust top padding as needed */
+      }
     </style>
 
     
@@ -49,6 +54,11 @@
   <body class="text-center">
     
     <main class="form-signin">
+      <% if (loggedIn) { %>
+        <div class="logout-button">
+            <a class="btn btn-sm btn-danger" href="/logout">Logout</a>
+        </div>
+      <% } %>
       <h1 class="h3 mb-3 fw-normal">ATK Report Submissions</h1>
       <table class="table">
           <thead>
