@@ -23,5 +23,3 @@ Step6: Use this command below at the terminal in vs code to build the docker ima
 docker-compose up –build
 ```
 Step7: After build the docker image, you can access the system in "localhost:4000"
-
-
