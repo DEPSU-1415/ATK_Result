@@ -13,3 +13,15 @@ Step 3: Replace the connection string in .env file with your connection string. 
 ![image](https://github.com/DEPSU-1415/ATK_Result/assets/118809826/418548b4-84e2-4ba4-82e9-c86441b669e9)
 
 Step4: Open Docker Desktop
+
+Step5: Make sure you need to “npm install” to download everything you don’t have.
+```
+npm instal
+```
+Step6: Use this command below at the terminal in vs code to build the docker image.
+```
+docker-compose up –build
+```
+Step7: After build the docker image, you can access the system in "localhost:4000"
+
+
