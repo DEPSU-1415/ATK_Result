@@ -65,6 +65,7 @@ app.use(expressSession({
 }))
 app.use("*", (req, res, next) => {
     loggedIn = req.session.userId
+    res.locals.message = req.flash('message');
     next()
 })
 app.set('view engine', 'ejs')

@@ -32,8 +32,10 @@ module.exports = async (req, res) => {
         console.log('Test Result:', testResult);
         console.log('Date Time:', dateTime);
 
+        req.flash('message', 'ATK Report successfully submitted');
         res.redirect('/home'); // Redirect after successful upload
     } catch (error) {
+        req.flash('error', 'An error occurred during the submission');
         console.error(error);
         res.status(500).send('An error occurred');
     }

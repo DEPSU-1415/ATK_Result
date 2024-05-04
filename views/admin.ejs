@@ -49,31 +49,38 @@
   <body class="text-center">
     
     <main class="form-signin">
-        <h1 class="h3 mb-3 fw-normal">ATK Report Submissions</h1>
-        <table class="table">
+      <h1 class="h3 mb-3 fw-normal">ATK Report Submissions</h1>
+      <table class="table">
           <thead>
-            <tr>
-              <th>Username</th>
-              <th>Photo</th>
-              <th>Result</th>
-              <th>Actions</th>
-            </tr>
+              <tr>
+                  <th>Username</th>
+                  <th>Images</th>
+                  <th>Results</th>
+                  <th>Date and Time</th>
+                  <th>Actions</th>
+              </tr>
           </thead>
           <tbody>
-            <% submissions.forEach(function(submission) { %>
-              <tr>
-                <td><%= submission.username %></td>
-                <td><img src="<%= submission.image %>" alt="ATK Report Image" style="width: 100px;"></td>
-                <td><%= submission.testResult %></td>
-                <td>
-                  <a href="/edit/<%= submission._id %>" class="btn btn-sm btn-primary">Edit</a>
-                  <a href="/delete/<%= submission._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
-                </td>
-              </tr>
-            <% }); %>
+              <% submissions.forEach(function(submission) { %>
+                  <tr>
+                      <td><%= submission.username %></td>
+                      <td><img src="<%= submission.image %>" alt="ATK Report Image" style="width: 100px;"></td>
+                      <td><%= submission.testResult %></td>
+                      <td><%= submission.dateTime.toLocaleString() %></td>
+                      <td>
+                          <a href="/edit/<%= submission._id %>" class="btn btn-sm btn-primary">Edit</a>
+                          <a href="/delete/<%= submission._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+                      </td>
+                  </tr>
+              <% }); %>
           </tbody>
-        </table>
-      </main>
+      </table>
+      <% if (message) { %>
+        <div class="alert alert-success" role="alert">
+            <%= message %>
+        </div>
+      <% } %>
+  </main>
 
 
     

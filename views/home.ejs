@@ -62,7 +62,7 @@
         </div>
       <% } %>
     
-      <form action="/user/atk-report" method="POST" enctype="multipart/form-data">
+      <form action="/user/atk-report" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
         <h1 class="h3 mb-3 fw-normal">ATK Report</h1>
     
         <div class="form-floating mb-3">
@@ -85,6 +85,16 @@
     
         <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
       </form>
+      <% if (locals.message) { %>
+        <div class="alert alert-success mt-3" role="alert">
+            <%= locals.message %>
+        </div>
+      <% } %>
+      <% if (locals.error) { %>
+        <div class="alert alert-danger mt-3" role="alert">
+            <%= locals.error %>
+        </div>
+      <% } %>
     </main>
     
     <script>
@@ -94,6 +104,26 @@
         if (item !== clicked) item.checked = false;
       });
     }
+
+    function validateForm() {
+    let image = document.getElementById('floatingImage').value;
+    let dateTime = document.getElementById('floatingDateTime').value;
+    let resultChecked = document.querySelector('input[name="testResult"]:checked');
+
+    if (!image) {
+      alert("Please upload an image.");
+      return false;
+    }
+    if (!resultChecked) {
+      alert("Please select a test result.");
+      return false;
+    }
+    if (!dateTime) {
+      alert("Please specify the date and time of the test.");
+      return false;
+    }
+    return true; // Only submit if all checks are passed
+  }
     </script>
 
 
